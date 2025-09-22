@@ -34,9 +34,8 @@ struct WebViewContainer: UIViewRepresentable {
         webView.navigationDelegate = context.coordinator
         context.coordinator.webView = webView
         webView.scrollView.contentInsetAdjustmentBehavior = .never
-        webView.isInspectable = true
         // Loading overlay
-        context.coordinator.loadingView = createLoadingView()
+        context.coordinator.loadingView = context.coordinator.createLoadingView()
         if let overlay = context.coordinator.loadingView {
             webView.addSubview(overlay)
             overlay.translatesAutoresizingMaskIntoConstraints = false
@@ -57,26 +56,6 @@ struct WebViewContainer: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: WKWebView, context: Context) {}
-
-    // Loading overlay
-    private func createLoadingView() -> UIView {
-        let overlay = UIView()
-        overlay.backgroundColor = .systemBackground
-
-        let logo = UIImageView()
-        logo.contentMode = .scaleAspectFit
-        logo.translatesAutoresizingMaskIntoConstraints = false
-        logo.image = UIImage(named: "AppLogo")
-        overlay.addSubview(logo)
-
-        NSLayoutConstraint.activate([
-            logo.centerXAnchor.constraint(equalTo: overlay.centerXAnchor),
-            logo.centerYAnchor.constraint(equalTo: overlay.centerYAnchor),
-            logo.widthAnchor.constraint(equalToConstant: 90),
-            logo.heightAnchor.constraint(equalToConstant: 90)
-        ])
-        return overlay
-    }
 
     // MARK: - Coordinator
     class Coordinator: NSObject, WKNavigationDelegate, WKScriptMessageHandler {
@@ -102,13 +81,13 @@ struct WebViewContainer: UIViewRepresentable {
                 }
             case "registerForNotifications":
                 DispatchQueue.main.async {
-                    print("STARTING")
+                    
                     if let token = APNSTokenManager.shared.deviceToken {
-                        print("FIN")
+                        
                         // Return the device token to JS
                         self.sendCallback(callbackName: callbackName, result: token)
                     } else {
-                        print("NOTFIN")
+                        
                         // Trigger APNs registration
                         UIApplication.shared.registerForRemoteNotifications()
                         // Registration not completed yet
@@ -134,15 +113,42 @@ struct WebViewContainer: UIViewRepresentable {
                     }
                     self.sendCallback(callbackName: callbackName, result: result)
                 }
-            case "getAppIcon":
-                let currentIcon = UIApplication.shared.alternateIconName ?? "default"
-                self.sendCallback(callbackName: callbackName, result: currentIcon)
+            case "getAppTheme":
+                let currentTheme = getThemeColorString()
+                self.sendCallback(callbackName: callbackName, result: currentTheme)
 
-            case "setAppIcon":
-                if let iconName = body["iconName"] as? String, UIApplication.shared.supportsAlternateIcons {
-                    UIApplication.shared.setAlternateIconName(iconName) { error in
-                        self.sendCallback(callbackName: callbackName, result: (error == nil) ? "success" : "error")
+            case "setAppTheme":
+                guard let hsl = body["hsl"] as? String else {
+                    self.sendCallback(callbackName: callbackName, result: "error")
+                    break
+                }
+                let themeMap: [String: String?] = [
+                    "162 23.3% 45.7%":nil,
+                    "350 72% 52%":"RedAppIcon",
+                    "338 49% 43%":"BurgundyAppIcon",
+                    "345 100% 78%":"PinkAppIcon",
+                    "31 100% 48%":"OrangeAppIcon",
+                    "40 97% 64%":"YellowAppIcon",
+                    "90 34% 63%":"LightGreenAppIcon",
+                    "201 100% 36%":"BlueAppIcon",
+                    "206 46% 37%":"NavyAppIcon",
+                    "239 77% 70%":"PurpleAppIcon"
+                   
+                ]
+                
+                if themeMap.keys.contains(hsl) {
+                    let iconName = themeMap[hsl] ?? nil
+                    if UIApplication.shared.supportsAlternateIcons {
+                        UIApplication.shared.setAlternateIconName(iconName) { error in
+                            let iconSuccess = (error == nil)
+                            UserDefaults.standard.set(hsl, forKey: "themeColor")
+                            self.sendCallback(callbackName: callbackName, result: iconSuccess ? "success" : "error")
+                        }
+                    } else{
+                        self.sendCallback(callbackName: callbackName, result: "error")
                     }
+                } else {
+                    self.sendCallback(callbackName: callbackName, result: "error")
                 }
 
             case "storeEncryptedCookies":
@@ -166,7 +172,7 @@ struct WebViewContainer: UIViewRepresentable {
                 }
 
             case "activateCron":
-                print("SHSHS")
+                
                 
                 let cookieStore = self.webView!.configuration.websiteDataStore.httpCookieStore
                 cookieStore.getAllCookies { cookies in
@@ -182,7 +188,7 @@ struct WebViewContainer: UIViewRepresentable {
                 }
 
             case "deactivateCron":
-                print("SHSHsjgfsdfgdjS")
+                
                 BackgroundTaskManager.shared.deactivate()
                 self.sendCallback(callbackName: callbackName, result: "ok")
 
@@ -192,7 +198,7 @@ struct WebViewContainer: UIViewRepresentable {
         }
 
         @objc private func didReceiveAPNSTokenNotification(_ notification: Notification) {
-            print("notif",notification)
+            
             guard let token = notification.userInfo?["token"] as? String,
                   let callbackName = apnsTokenCallbackName else { return }
             APNSTokenManager.shared.updateDeviceToken(token)
@@ -210,7 +216,7 @@ struct WebViewContainer: UIViewRepresentable {
         }
 
         // MARK: - Navigation delegate
-        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
             if let overlay = loadingView {
                 UIView.animate(withDuration: 0.4, animations: { overlay.alpha = 0 }) { _ in
                     overlay.removeFromSuperview()
@@ -304,14 +310,26 @@ struct WebViewContainer: UIViewRepresentable {
             }
         }
 
-        private func createLoadingView() -> UIView {
+        func createLoadingView() -> UIView {
             let overlay = UIView()
             overlay.backgroundColor = .systemBackground
 
             let logo = UIImageView()
             logo.contentMode = .scaleAspectFit
             logo.translatesAutoresizingMaskIntoConstraints = false
-            logo.image = UIImage(named: "AppLogo")
+            // Load SVG asset as UIImage and apply tint color based on themeColor in UserDefaults
+            let themeColorString = getThemeColorString()
+            
+            let themeColor = UIColor.fromHSLString(themeColorString)
+        
+            // Assume SVG is in assets as "AppLogoSVG"
+            if let svgImage = UIImage(named: "AppLogoSVG")?.withRenderingMode(.alwaysTemplate) {
+                logo.image = svgImage
+                logo.tintColor = themeColor
+            } else if let fallback = UIImage(named: "AppLogo")?.withRenderingMode(.alwaysTemplate) {
+                logo.image = fallback
+                logo.tintColor = themeColor
+            }
             overlay.addSubview(logo)
 
             NSLayoutConstraint.activate([
@@ -323,4 +341,37 @@ struct WebViewContainer: UIViewRepresentable {
             return overlay
         }
     }
+}
+
+fileprivate extension UIColor {
+    static func fromHSLString(_ hsl: String) -> UIColor? {
+        // Match 'H S% L%' (optionally with decimals)
+        let pattern = "^\\s*(\\d+(?:\\.\\d+)?)\\s+(\\d+(?:\\.\\d+)?)%\\s+(\\d+(?:\\.\\d+)?)%\\s*$"
+        guard let regex = try? NSRegularExpression(pattern: pattern),
+              let match = regex.firstMatch(in: hsl, range: NSRange(hsl.startIndex..., in: hsl)),
+              match.numberOfRanges == 4,
+              let hRange = Range(match.range(at: 1), in: hsl),
+              let sRange = Range(match.range(at: 2), in: hsl),
+              let lRange = Range(match.range(at: 3), in: hsl),
+              let h = Double(hsl[hRange]),
+              let s = Double(hsl[sRange]),
+              let l = Double(hsl[lRange]) else {
+            return nil
+        }
+        // Convert H,S,L to 0...1
+        let hNorm = h / 360.0
+        let sNorm = s / 100.0
+        let lNorm = l / 100.0
+        // Convert HSL to RGB and then UIColor
+        // UIColor's brightness corresponds to value in HSV, so we convert HSL to HSV:
+        // Formula: v = l + s * min(l, 1-l)
+        //        sHSV = 2 * (1 - l / v) if v != 0 else 0
+        let v = lNorm + sNorm * min(lNorm, 1 - lNorm)
+        let sHSV: CGFloat = (v == 0) ? 0 : 2 * (1 - CGFloat(lNorm) / CGFloat(v))
+        return UIColor(hue: CGFloat(hNorm), saturation: sHSV, brightness: CGFloat(v), alpha: 1.0)
+    }
+}
+func getThemeColorString() -> String {
+    let color = UserDefaults.standard.string(forKey: "themeColor") ?? "162 23.3% 45.7%"
+    return color
 }

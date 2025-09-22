@@ -31,7 +31,6 @@ final class BackgroundTaskManager {
     }
 
     func activate(studentId: String, credentials: String) {
-        print("HEHEHEHEGVVSDJVSJVD")
         self.studentId = studentId
         self.credentialsString = credentials
         
@@ -48,7 +47,7 @@ final class BackgroundTaskManager {
     }
 
     func deactivate() {
-        print("SJSJSAABYEY")
+        
         isActivated = false
         BGTaskScheduler.shared.cancel(taskRequestWithIdentifier: Constants.backgroundTaskIdentifier)
     }
@@ -76,7 +75,7 @@ final class BackgroundTaskManager {
         
     }
     public func performHourlyPing() {
-        print("SJJSGJS")
+        
 
         guard RefreshTracker.shouldRun() else {
             print("Hourly refresh skipped, already triggered in the last hour")

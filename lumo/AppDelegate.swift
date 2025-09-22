@@ -22,8 +22,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let tokenString = deviceToken.map{ String(format: "%02x", $0) }.joined()
         APNSTokenManager.shared.updateDeviceToken(tokenString)
-        print("here", tokenString)
-        // Notify observers that a new device token is available
+
         
         
         NotificationCenter.default.post(name: Notification.Name.didReceiveAPNSToken, object: nil, userInfo: ["token": tokenString])
@@ -34,7 +33,6 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         
         // Only run if it's a silent push with "content-available": 1
       if let aps = userInfo["aps"] as? [AnyHashable: Any], let contentAvailable = aps["content-available"] as? Int, contentAvailable == 1 {
-            print("sjssh")
             BackgroundTaskManager.shared.performHourlyPing()
             completionHandler(.newData)
         } else {
