@@ -6,63 +6,33 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXContainerItemProxy section */
-		1D26584A2E7E6E3000D430E5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1D2658322E7E6E2E00D430E5 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1D2658392E7E6E2E00D430E5;
-			remoteInfo = lumo;
-		};
-		1D2658542E7E6E3000D430E5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1D2658322E7E6E2E00D430E5 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1D2658392E7E6E2E00D430E5;
-			remoteInfo = lumo;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		1D26583A2E7E6E2E00D430E5 /* lumo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lumo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		1D2658492E7E6E3000D430E5 /* lumoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = lumoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1D2658532E7E6E3000D430E5 /* lumoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = lumoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		1D2658672E7E700000D430E5 /* Exceptions for "lumo" folder in "lumo" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 1D2658392E7E6E2E00D430E5 /* lumo */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1D26583C2E7E6E2E00D430E5 /* lumo */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				1D2658672E7E700000D430E5 /* Exceptions for "lumo" folder in "lumo" target */,
+			);
 			path = lumo;
-			sourceTree = "<group>";
-		};
-		1D26584C2E7E6E3000D430E5 /* lumoTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = lumoTests;
-			sourceTree = "<group>";
-		};
-		1D2658562E7E6E3000D430E5 /* lumoUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = lumoUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		1D2658372E7E6E2E00D430E5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1D2658462E7E6E3000D430E5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1D2658502E7E6E3000D430E5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -76,8 +46,6 @@
 			isa = PBXGroup;
 			children = (
 				1D26583C2E7E6E2E00D430E5 /* lumo */,
-				1D26584C2E7E6E3000D430E5 /* lumoTests */,
-				1D2658562E7E6E3000D430E5 /* lumoUITests */,
 				1D26583B2E7E6E2E00D430E5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -86,8 +54,6 @@
 			isa = PBXGroup;
 			children = (
 				1D26583A2E7E6E2E00D430E5 /* lumo.app */,
-				1D2658492E7E6E3000D430E5 /* lumoTests.xctest */,
-				1D2658532E7E6E3000D430E5 /* lumoUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -117,52 +83,6 @@
 			productReference = 1D26583A2E7E6E2E00D430E5 /* lumo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		1D2658482E7E6E3000D430E5 /* lumoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1D2658602E7E6E3000D430E5 /* Build configuration list for PBXNativeTarget "lumoTests" */;
-			buildPhases = (
-				1D2658452E7E6E3000D430E5 /* Sources */,
-				1D2658462E7E6E3000D430E5 /* Frameworks */,
-				1D2658472E7E6E3000D430E5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1D26584B2E7E6E3000D430E5 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				1D26584C2E7E6E3000D430E5 /* lumoTests */,
-			);
-			name = lumoTests;
-			packageProductDependencies = (
-			);
-			productName = lumoTests;
-			productReference = 1D2658492E7E6E3000D430E5 /* lumoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		1D2658522E7E6E3000D430E5 /* lumoUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1D2658632E7E6E3000D430E5 /* Build configuration list for PBXNativeTarget "lumoUITests" */;
-			buildPhases = (
-				1D26584F2E7E6E3000D430E5 /* Sources */,
-				1D2658502E7E6E3000D430E5 /* Frameworks */,
-				1D2658512E7E6E3000D430E5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1D2658552E7E6E3000D430E5 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				1D2658562E7E6E3000D430E5 /* lumoUITests */,
-			);
-			name = lumoUITests;
-			packageProductDependencies = (
-			);
-			productName = lumoUITests;
-			productReference = 1D2658532E7E6E3000D430E5 /* lumoUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -175,14 +95,6 @@
 				TargetAttributes = {
 					1D2658392E7E6E2E00D430E5 = {
 						CreatedOnToolsVersion = 16.4;
-					};
-					1D2658482E7E6E3000D430E5 = {
-						CreatedOnToolsVersion = 16.4;
-						TestTargetID = 1D2658392E7E6E2E00D430E5;
-					};
-					1D2658522E7E6E3000D430E5 = {
-						CreatedOnToolsVersion = 16.4;
-						TestTargetID = 1D2658392E7E6E2E00D430E5;
 					};
 				};
 			};
@@ -201,28 +113,12 @@
 			projectRoot = "";
 			targets = (
 				1D2658392E7E6E2E00D430E5 /* lumo */,
-				1D2658482E7E6E3000D430E5 /* lumoTests */,
-				1D2658522E7E6E3000D430E5 /* lumoUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1D2658382E7E6E2E00D430E5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1D2658472E7E6E3000D430E5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1D2658512E7E6E3000D430E5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -239,34 +135,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1D2658452E7E6E3000D430E5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1D26584F2E7E6E3000D430E5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		1D26584B2E7E6E3000D430E5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1D2658392E7E6E2E00D430E5 /* lumo */;
-			targetProxy = 1D26584A2E7E6E3000D430E5 /* PBXContainerItemProxy */;
-		};
-		1D2658552E7E6E3000D430E5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1D2658392E7E6E2E00D430E5 /* lumo */;
-			targetProxy = 1D2658542E7E6E3000D430E5 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1D26585B2E7E6E3000D430E5 /* Debug */ = {
@@ -393,15 +262,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = lumo/lumo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8VHZSXX2LV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = lumo/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Lumo;
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Networking for sync";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -420,15 +294,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = lumo/lumo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8VHZSXX2LV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = lumo/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Lumo;
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Networking for sync";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -439,74 +318,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		1D2658612E7E6E3000D430E5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lumobc.lumoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/lumo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/lumo";
-			};
-			name = Debug;
-		};
-		1D2658622E7E6E3000D430E5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lumobc.lumoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/lumo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/lumo";
-			};
-			name = Release;
-		};
-		1D2658642E7E6E3000D430E5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lumobc.lumoUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = lumo;
-			};
-			name = Debug;
-		};
-		1D2658652E7E6E3000D430E5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lumobc.lumoUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = lumo;
 			};
 			name = Release;
 		};
@@ -527,24 +338,6 @@
 			buildConfigurations = (
 				1D26585E2E7E6E3000D430E5 /* Debug */,
 				1D26585F2E7E6E3000D430E5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1D2658602E7E6E3000D430E5 /* Build configuration list for PBXNativeTarget "lumoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1D2658612E7E6E3000D430E5 /* Debug */,
-				1D2658622E7E6E3000D430E5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1D2658632E7E6E3000D430E5 /* Build configuration list for PBXNativeTarget "lumoUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1D2658642E7E6E3000D430E5 /* Debug */,
-				1D2658652E7E6E3000D430E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
