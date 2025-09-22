@@ -31,6 +31,9 @@ struct WebViewContainer: UIViewRepresentable {
         config.userContentController = userController
 
         let webView = WKWebView(frame: .zero, configuration: config)
+        webView.isOpaque = false
+        webView.backgroundColor = .systemBackground
+        webView.scrollView.backgroundColor = .systemBackground
         webView.navigationDelegate = context.coordinator
         context.coordinator.webView = webView
         webView.scrollView.contentInsetAdjustmentBehavior = .never
@@ -321,13 +324,16 @@ struct WebViewContainer: UIViewRepresentable {
             let themeColorString = getThemeColorString()
             
             let themeColor = UIColor.fromHSLString(themeColorString)
-        
+            
             // Assume SVG is in assets as "AppLogoSVG"
             if let svgImage = UIImage(named: "AppLogoSVG")?.withRenderingMode(.alwaysTemplate) {
                 logo.image = svgImage
-                logo.tintColor = themeColor
+               
             } else if let fallback = UIImage(named: "AppLogo")?.withRenderingMode(.alwaysTemplate) {
-                logo.image = fallback
+               
+            }
+            let isLightMode = UITraitCollection.current.userInterfaceStyle == .light
+            if isLightMode {
                 logo.tintColor = themeColor
             }
             overlay.addSubview(logo)
